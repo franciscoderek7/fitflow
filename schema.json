@@ -1,0 +1,15 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "FitFlow",
+  "description": "FitFlow \u2014 AI-powered fitness coaching platform. Personalized workout plans, adaptive training, and real-time form correction.",
+  "url": "https://franciscoderek7.github.io/fitflow",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "99",
+    "highPrice": "2499"
+  }
+}
