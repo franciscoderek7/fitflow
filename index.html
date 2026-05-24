@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FitFlow - AI-Powered Fitness Optimization. Personalized AI training programs, nutrition planning, biometric integration, workout tracking, virtual coaching, and wellness community.">
+    <meta name="keywords" content="AI fitness, training programs, nutrition planning, biometric integration, virtual coaching, wellness community">
+    <title>FitFlow | AI-Powered Fitness Optimization</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        pink: {
+                            500: '#ec4899',
+                            600: '#db2777',
+                        },
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #020617;
+            color: #f8fafc;
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #ec4899, #06b6d4);
+        }
+        .bg-gradient {
+            background-image: linear-gradient(to right, #ec4899, #06b6d4);
+        }
+        .glow {
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        .flow-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        .flow-shape {
+            position: absolute;
+            filter: blur(80px);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-pink-500 selection:text-white">
+
+    <!-- Background Flow Effects -->
+    <div class="flow-bg">
+        <div class="flow-shape bg-pink-500 w-96 h-96 top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="flow-shape bg-cyan-500 w-96 h-96 bottom-0 right-0 translate-x-1/3 translate-y-1/3"></div>
+        <div class="flow-shape bg-pink-500 w-64 h-64 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-darker/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i class="fa-solid fa-person-running text-3xl text-pink-500"></i>
+                    <span class="font-bold text-2xl tracking-tight">Fit<span class="text-cyan-400">Flow</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#features" class="text-gray-300 hover:text-white transition-colors">Features</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+                <div class="hidden md:flex">
+                    <a href="#pricing" class="bg-gradient text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition-opacity glow">Get Started</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark border-b border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Home</a>
+                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Features</a>
+                <a href="#pricing" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Pricing</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+        <div class="flex-1 text-center lg:text-left">
+            <div class="inline-block px-4 py-1 rounded-full bg-gray-800/50 border border-gray-700 text-cyan-400 text-sm font-medium mb-6">
+                <i class="fa-solid fa-bolt mr-2"></i> Next-Gen Fitness Technology
+            </div>
+            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                AI-Powered <br>
+                <span class="text-gradient">Fitness Optimization</span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
+                Personalized AI training programs, nutrition planning, biometric integration, workout tracking, virtual coaching, and wellness community.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#pricing" class="bg-gradient text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-opacity glow flex items-center justify-center gap-2">
+                    Start Your Journey <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#features" class="bg-gray-800 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-700 transition-colors border border-gray-700 flex items-center justify-center">
+                    Explore Features
+                </a>
+            </div>
+            
+            <div class="mt-12 flex items-center justify-center lg:justify-start gap-6 text-gray-400">
+                <div class="flex -space-x-4">
+                    <img class="w-10 h-10 rounded-full border-2 border-darker" src="https://i.pravatar.cc/100?img=1" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-darker" src="https://i.pravatar.cc/100?img=2" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-darker" src="https://i.pravatar.cc/100?img=3" alt="User">
+                    <div class="w-10 h-10 rounded-full border-2 border-darker bg-gray-800 flex items-center justify-center text-xs font-bold">+10k</div>
+                </div>
+                <div class="text-sm">
+                    <div class="flex text-pink-500">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="font-medium text-white">4.9/5</span> from active users
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 relative w-full max-w-lg lg:max-w-none">
+            <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/20 to-cyan-500/20 rounded-3xl blur-3xl"></div>
+            <div class="relative bg-gray-900 border border-gray-800 rounded-3xl p-2 shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1554244933-d876deb6b2ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness App Interface" class="rounded-2xl w-full object-cover h-[500px] opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500">
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-10 -left-10 bg-darker/90 backdrop-blur border border-gray-700 p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
+                    <div class="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-500">
+                        <i class="fa-solid fa-heart-pulse text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">Heart Rate</div>
+                        <div class="font-bold text-xl">142 <span class="text-sm font-normal text-gray-500">bpm</span></div>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-20 -right-10 bg-darker/90 backdrop-blur border border-gray-700 p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce" style="animation-duration: 4s; animation-delay: 1s;">
+                    <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                        <i class="fa-solid fa-fire text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">Calories Burned</div>
+                        <div class="font-bold text-xl">850 <span class="text-sm font-normal text-gray-500">kcal</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Intelligent <span class="text-gradient">Features</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Everything you need to optimize your fitness journey, powered by advanced artificial intelligence.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-pink-500/50 transition-colors group">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Training Plans</h3>
+                    <p class="text-gray-400">Dynamic workout routines that adapt in real-time based on your performance, recovery, and goals.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-cyan-500/50 transition-colors group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-apple-whole text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Nutrition Planner</h3>
+                    <p class="text-gray-400">Personalized meal plans and macro tracking synchronized with your daily energy expenditure.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-pink-500/50 transition-colors group">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-watch-fitness text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Biometric Sync</h3>
+                    <p class="text-gray-400">Seamless integration with wearables to monitor HRV, sleep quality, and readiness scores.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-cyan-500/50 transition-colors group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-astronaut text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Virtual Coach</h3>
+                    <p class="text-gray-400">Real-time form correction and motivational feedback during your workouts via computer vision.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-pink-500/50 transition-colors group">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Progress Analytics</h3>
+                    <p class="text-gray-400">Deep insights into your fitness journey with predictive modeling for future milestones.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-cyan-500/50 transition-colors group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Community Challenges</h3>
+                    <p class="text-gray-400">Engage with a global wellness community, join leaderboards, and achieve goals together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent <span class="text-gradient">Pricing</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Choose the perfect plan to accelerate your fitness journey.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                    <p class="text-gray-400 mb-6">Essential tools for tracking.</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$14.99</span>
+                        <span class="text-gray-500">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> Standard Workouts
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> Workout Tracking
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> Community Access
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border border-gray-700 hover:bg-gray-800 transition-colors font-medium">Choose Basic</button>
+                </div>
+                
+                <!-- Pro Plan -->
+                <div class="bg-gray-900 border-2 border-pink-500 rounded-3xl p-8 flex flex-col relative transform md:-translate-y-4 glow">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient text-white px-4 py-1 rounded-full text-sm font-bold">
+                        Most Popular
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                    <p class="text-gray-400 mb-6">Advanced AI optimization.</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$39.99</span>
+                        <span class="text-gray-500">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-pink-500"></i> Everything in Basic
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-pink-500"></i> AI Coaching
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-pink-500"></i> Nutrition Planner
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-pink-500"></i> Biometric Sync
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full bg-gradient text-white hover:opacity-90 transition-opacity font-medium">Choose Pro</button>
+                </div>
+                
+                <!-- Elite Plan -->
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Elite</h3>
+                    <p class="text-gray-400 mb-6">Ultimate personalized experience.</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$99.99</span>
+                        <span class="text-gray-500">/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> Everything in Pro
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> 1-on-1 Virtual Trainer
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> Priority Support
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i> Custom Meal Delivery Prep
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border border-gray-700 hover:bg-gray-800 transition-colors font-medium">Choose Elite</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark relative border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <div class="flex-1">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to find your <span class="text-gradient">Flow</span>?</h2>
+                    <p class="text-gray-400 mb-8 text-lg">Get in touch with our team to learn more about how FitFlow can transform your fitness journey.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-pink-500">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Call Us</div>
+                                <div class="text-lg font-medium">705-307-8080</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-cyan-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Email Us</div>
+                                <div class="text-lg font-medium">franciscoderek7@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex-1">
+                    <form class="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">First Name</label>
+                                <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500 transition-colors" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
+                                <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500 transition-colors" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                            <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500 transition-colors" placeholder="john@example.com">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                            <textarea rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500 transition-colors" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="button" class="w-full py-4 rounded-xl bg-gradient text-white font-bold text-lg hover:opacity-90 transition-opacity">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-person-running text-2xl text-pink-500"></i>
+                <span class="font-bold text-xl tracking-tight">Fit<span class="text-cyan-400">Flow</span></span>
+            </div>
+            
+            <div class="text-gray-500 text-sm text-center md:text-left">
+                &copy; 2026 FitFlow. All rights reserved. <br class="md:hidden">
+                <a href="https://franciscoderek7.github.io/francisco-holdings/" target="_blank" class="text-gray-400 hover:text-white transition-colors mt-2 inline-block">
+                    A Francisco Holdings Company
+                </a>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-pink-500 transition-all">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-pink-500 transition-all">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-cyan-500 transition-all">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
